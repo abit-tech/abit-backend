@@ -11,4 +11,12 @@ need the following functionalities:
 - docker image for deployment
 - configuration manager
 
-- commit through linux
+
+todos:
+
+- [ ] break down env variables into individual keys
+- [ ] use config instead of env (need to check)
+- [ ] decide on user model 
+- [ ] add a logger
+
+

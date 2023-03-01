@@ -10,3 +10,5 @@ need the following functionalities:
 - payment gateway
 - docker image for deployment
 - configuration manager
+
+- commit through linux

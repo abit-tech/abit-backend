@@ -9,6 +9,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"www.github.com/abit-tech/abit-backend/common"
 	"www.github.com/abit-tech/abit-backend/initializers"
 	"www.github.com/abit-tech/abit-backend/models"
 	"www.github.com/abit-tech/abit-backend/utils"
@@ -21,10 +22,18 @@ Set the Referrer-Policy: no-referrer-when-downgrade header when testing using ht
 
 */
 
-func GoogleLogin(ctx *gin.Context) {
+func GoogleLoginForUser(ctx *gin.Context) {
 	url := initializers.GoogleConfig.AuthCodeURL("randomstate")
+	config := initializers.AppConf
+	ctx.SetCookie(common.RoleCookie, common.RoleUser, config.TokenMaxAge*60, "/", "localhost", false, true)
 	ctx.Redirect(http.StatusTemporaryRedirect, url)
+}
 
+func GoogleLoginForCreator(ctx *gin.Context) {
+	url := initializers.GoogleConfig.AuthCodeURL("randomstate") // todo use random state for state
+	config := initializers.AppConf
+	ctx.SetCookie(common.RoleCookie, common.RoleCreator, config.TokenMaxAge*60, "/", "localhost", false, true)
+	ctx.Redirect(http.StatusTemporaryRedirect, url)
 }
 
 func GoogleCallback(ctx *gin.Context) {

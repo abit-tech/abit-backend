@@ -45,7 +45,7 @@ type YoutubeSecrets struct {
 func LoadConfig(path string) error {
 	viper.AddConfigPath(path)
 	viper.SetConfigType("env")
-	viper.SetConfigName(".env")
+	viper.SetConfigName("testconf")
 
 	viper.AutomaticEnv()
 

@@ -18,17 +18,17 @@ var server *gin.Engine
 func init() {
 	err := initializers.LoadConfig(".")
 	if err != nil {
-		panic("error in reading config")
+		fmt.Printf("could not find file, reading from ENV")
 	}
 
+	prettyConf, _ := json.MarshalIndent(initializers.AppConf, "", "\t")
+	fmt.Printf("config object: %v\n", string(prettyConf))
 	initializers.ConnectDB()
 	initializers.SyncDatabase()
 	initializers.SetupGoogleOauth()
 
 	server = gin.Default()
 
-	prettyConf, _ := json.MarshalIndent(initializers.AppConf, "", "\t")
-	fmt.Printf("config object: %v\n", string(prettyConf))
 }
 
 func main() {
@@ -102,5 +102,5 @@ func main() {
 	// // auth_router.POST("/login", controllers.GoogleSignInUser)
 	// // auth_router.GET("/logout", middleware.DeserializeUser(), controllers.GoogleLogoutUser)
 
-	server.Run(":" + "3000")
+	server.Run()
 }

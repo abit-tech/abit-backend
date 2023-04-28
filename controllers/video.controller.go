@@ -9,7 +9,6 @@ import (
 	"github.com/gin-gonic/gin"
 	uuid "github.com/satori/go.uuid"
 	"www.github.com/abit-tech/abit-backend/common"
-	"www.github.com/abit-tech/abit-backend/htmltopdf"
 	"www.github.com/abit-tech/abit-backend/initializers"
 	"www.github.com/abit-tech/abit-backend/models"
 )
@@ -86,7 +85,6 @@ func CreateVideo(ctx *gin.Context) {
 	go FractionalizeVideo(newVideo)
 
 	// create revenue sharing contract
-	go htmltopdf.GenerateRevenueSharingContract(newVideo, currentUser)
 
 	// create perks for this video
 	for _, data := range payload.Perks {
@@ -482,7 +480,6 @@ func PurchaseToken(ctx *gin.Context) {
 		})
 		return
 	}
-	go htmltopdf.GenerateTokenOwnershipContract(token, video, creator, currentUser)
 
 	fmt.Printf("token found: %v\n", token)
 	token.OwnerID = currentUser.ID

@@ -40,6 +40,7 @@ func main() {
 	corsConfig := cors.DefaultConfig()
 	corsConfig.AllowOrigins = []string{
 		"http://localhost:3000",
+		"https://getabit.co",
 	}
 
 	corsConfig.AllowCredentials = true
